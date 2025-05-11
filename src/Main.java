@@ -2,6 +2,7 @@ import members_management.MemberService;
 import membership_plans.MembershipPlan;
 import membership_plans.MembershipService;
 import membership_plans.MembershipType;
+import payment_tracking.PaymentManagement;
 import tainers_management.Trainer;
 import tainers_management.TrainerService;
 
@@ -21,9 +22,10 @@ public class Main {
                     "2. Manage trainers\n" +
                     "3. Manage membership plans\n" +
                     "4. Assign members to trainers\n" +
-                    "5. View reports\n" +
-                    "6. Save and exit\n" +
-                    "\nEnter choice[1-6]: ");
+                    "5. Manage payments\n" +
+                    "6. View reports\n" +
+                    "7. Save and exit\n" +
+                    "\nEnter choice[1-7]: ");
             int choice=sc.nextInt();
             switch (choice){
                 case 1:
@@ -36,12 +38,15 @@ public class Main {
                     planManagementActions(sc);
                     break;
                 case 4:
-                    TrainerService.assignMemberToTrainer(sc);
+                    paymentTracking(sc);
                     break;
                 case 5:
-                    System.out.println("In development");
+                    TrainerService.assignMemberToTrainer(sc);
                     break;
                 case 6:
+                    System.out.println("In development");
+                    break;
+                case 7:
                     System.out.println("Thank you for using the system.");
                     run=false;
                     break;
@@ -143,4 +148,38 @@ public class Main {
         }
     }
 
+    public static void paymentTracking(Scanner sc){
+        boolean isTrackingPayment=true;
+        while(isTrackingPayment){
+            System.out.println("==== Track payments ====");
+            System.out.println("1. Make payment");
+            System.out.println("2. View  payments");
+            System.out.println("3. View member payments");
+            System.out.println("4. View outstanding payments");
+            System.out.println("5. Exit");
+            System.out.print("Choose action[1-4]: ");
+            int action=sc.nextInt();
+            switch (action){
+                case 1:
+                    PaymentManagement.makePayment(sc);
+                    break;
+                case 2:
+                    PaymentManagement.viewAllPayments();
+                    break;
+                case 3:
+                    PaymentManagement.viewMemberPayments(sc);
+                    break;
+                case 4:
+                    PaymentManagement.viewMembersWhoHaveNotPaid();
+                    break;
+                case 5:
+                    System.out.println("Completed");
+                    isTrackingPayment=false;
+                    break;
+                default:
+                    System.out.print("No valid action was taken.");
+                    break;
+            }
+        }
+    }
 }
