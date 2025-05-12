@@ -1,9 +1,7 @@
 import members_management.MemberService;
-import membership_plans.MembershipPlan;
 import membership_plans.MembershipService;
-import membership_plans.MembershipType;
 import payment_tracking.PaymentManagement;
-import tainers_management.Trainer;
+import reports.ReportService;
 import tainers_management.TrainerService;
 
 import java.util.Scanner;
@@ -44,7 +42,7 @@ public class Main {
                     TrainerService.assignMemberToTrainer(sc);
                     break;
                 case 6:
-                    System.out.println("In development");
+                    reportManagement(sc);
                     break;
                 case 7:
                     System.out.println("Thank you for using the system.");
@@ -175,6 +173,33 @@ public class Main {
                 case 5:
                     System.out.println("Completed");
                     isTrackingPayment=false;
+                    break;
+                default:
+                    System.out.print("No valid action was taken.");
+                    break;
+            }
+        }
+    }
+
+    public static void reportManagement(Scanner sc){
+        boolean isViewingReports=true;
+        while(isViewingReports){
+            System.out.println("==== Track payments ====");
+            System.out.println("1. Trainer report");
+            System.out.println("2. Members under a plan");
+            System.out.println("3. Exit");
+            System.out.print("Choose action[1-3]: ");
+            int action=sc.nextInt();
+            switch (action){
+                case 1:
+                    ReportService.membersByTrainer(sc);
+                    break;
+                case 2:
+                    ReportService.membersByMembership(sc);
+                    break;
+                case 3:
+                    System.out.println("Completed");
+                    isViewingReports=false;
                     break;
                 default:
                     System.out.print("No valid action was taken.");

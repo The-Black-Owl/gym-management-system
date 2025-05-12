@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class TrainerService {
-    private static final HashMap<String,Trainer> trainers=new HashMap<>();
+    public static final HashMap<String,Trainer> trainers=new HashMap<>();
 
     public static void createTrainer(Scanner sc){
         System.out.println("==== Add Trainer ====");
