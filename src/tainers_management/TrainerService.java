@@ -1,6 +1,5 @@
 package tainers_management;
 
-import members_management.Member;
 import members_management.MemberService;
 
 import java.util.HashMap;
@@ -81,9 +80,7 @@ public class TrainerService {
         Optional.of(trainers).ifPresentOrElse(trainer -> {
             trainers.remove(id);
             System.out.println("Trainer has been removed.");
-        },()->{
-            System.out.println("Trainer does not exist");
-        });
+        },()-> System.out.println("Trainer does not exist"));
     }
 
     public static void assignMemberToTrainer(Scanner sc){
@@ -96,51 +93,66 @@ public class TrainerService {
             Optional.ofNullable(MemberService.members.get(memberID)).ifPresentOrElse(member -> {
                 member.setTrainer(trainer);
                 trainer.addMember(member);
-            },()->{
-                System.out.print("Member ID is invalid, please verify if input is correct");
-            });
-        },()->{
-            System.out.println("Trainer does not exist. Please verify trainer ID is correct");
-        });
+            },()->System.out.print("Member ID is invalid, please verify if input is correct"));
+        },()->System.out.println("Trainer does not exist. Please verify trainer ID is correct")
+        );
     }
 
-    public static  List<Trainer> searchTrainerByName(Scanner sc){
+    public static  void searchTrainerByName(Scanner sc){
         System.out.print("=== Search trainer by name ===\nPlease enter trainer name: ");
         String name=sc.next();
-        return trainers.values().stream()
+        List<String> trainerSearch=trainers.values().stream()
                 .filter(trainer -> name.equalsIgnoreCase(trainer.getName()))
-                .collect(Collectors.toList());
+                .map(Trainer::trainerReport)
+                .collect(Collectors.toList()) ;
+        if(trainerSearch.isEmpty()){
+            System.out.println("Trainer not found");
+        }
+        trainerSearch.forEach(System.out::println);
     }
 
     public static void deactivateTrainer(Scanner sc){
         System.out.print("=== Deactivate trainer ===\nEnter trainer ID: ");
         String id=sc.next();
-        Optional.ofNullable(trainers.get(id)).ifPresentOrElse(trainer->{
-            trainer.setActive(false);
-        },()->{
-            System.out.println("Trainer does not exist");
-        });
+        Optional.ofNullable(trainers.get(id)).ifPresentOrElse(trainer->trainer.setActive(false)
+                ,()->System.out.println("Trainer does not exist"));
     }
 
     public static void activateTrainer(Scanner sc){
         System.out.print("=== Activate trainer ===\nEnter trainer ID: ");
         String id=sc.next();
-        Optional.ofNullable(trainers.get(id)).ifPresentOrElse(trainer->{
-            trainer.setActive(true);
-        },()->{
-            System.out.println("Trainer does not exist");
-        });
+        Optional.ofNullable(trainers.get(id)).ifPresentOrElse(trainer-> trainer.setActive(true),()-> System.out.println("Trainer does not exist"));
     }
 
-    public static List<Trainer> getAllActiveTrainers(){
-        return trainers.values().stream()
+    public static void getAllActiveTrainers(){
+        System.out.println("=== Active trainers ===\n");
+        List<String> activeTrainers=trainers.values().stream()
                 .filter(Trainer::isActive)
+                .map(trainer ->"{\n" +
+                            "Trainer ID: " + trainer.getId()+
+                            "\nTrainer Name: " + trainer.getName()+
+                            "\nTrainer status: Active\n}"
+                )
                 .collect(Collectors.toList());
+        if(activeTrainers.isEmpty()){
+            System.out.println("No active trainers found.");
+        }
+        activeTrainers.forEach(System.out::println);
     }
 
-    public static List<Trainer> getAllInactiveTrainers(){
-        return trainers.values().stream()
+    public static void getAllInactiveTrainers(){
+        System.out.println("=== All inactive trainers ====\n");
+        List<String> inactiveTrainers=trainers.values().stream()
                 .filter(trainer->!trainer.isActive())
+                .map(trainer ->
+                    "{\n" +
+                            "Trainer ID: " + trainer.getId()+
+                            "\nTrainer Name: " + trainer.getName()+
+                            "\nTrainer status: Active\n}")
                 .collect(Collectors.toList());
+        if(inactiveTrainers.isEmpty()){
+            System.out.println("No inactive trainers found");
+        }
+        inactiveTrainers.forEach(System.out::println);
     }
 }

@@ -110,8 +110,10 @@ public class Main {
             System.out.println("1. Add trainer");
             System.out.println("2. Update trainer");
             System.out.println("3. Delete trainer");
-            System.out.println("4. Exit");
-            System.out.print("Choose action[1-4]: ");
+            System.out.println("4. Activate trainer");
+            System.out.println("5. Deactivate trainer");
+            System.out.println("6. Exit");
+            System.out.print("Choose action[1-6]: ");
             int action=sc.nextInt();
             switch (action){
                 case 1:
@@ -124,6 +126,12 @@ public class Main {
                     TrainerService.deleteTrainer(sc);
                     break;
                 case 4:
+                    TrainerService.activateTrainer(sc);
+                    break;
+                case 5:
+                    TrainerService.deactivateTrainer(sc);
+                    break;
+                case 6:
                     train=false;
                     break;
                 default:
@@ -169,7 +177,7 @@ public class Main {
             System.out.println("3. View member payments");
             System.out.println("4. View outstanding payments");
             System.out.println("5. Exit");
-            System.out.print("Choose action[1-4]: ");
+            System.out.print("Choose action[1-5]: ");
             int action=sc.nextInt();
             switch (action){
                 case 1:
@@ -200,18 +208,30 @@ public class Main {
         while(isViewingReports){
             System.out.println("==== Track payments ====");
             System.out.println("1. Trainer report");
-            System.out.println("2. Members under a plan");
-            System.out.println("3. Exit");
-            System.out.print("Choose action[1-3]: ");
+            System.out.println("2. Trainer by name");
+            System.out.println("3. Members under a plan");
+            System.out.println("4. Show active trainers");
+            System.out.println("5. Show inactive trainers");
+            System.out.println("6. Exit");
+            System.out.print("Choose action[1-6]: ");
             int action=sc.nextInt();
             switch (action){
                 case 1:
                     ReportService.membersByTrainer(sc);
                     break;
                 case 2:
-                    ReportService.membersByMembership(sc);
+                    TrainerService.searchTrainerByName(sc);
                     break;
                 case 3:
+                    ReportService.membersByMembership(sc);
+                    break;
+                case 4:
+                    TrainerService.getAllActiveTrainers();
+                    break;
+                case 5:
+                    TrainerService.getAllInactiveTrainers();
+                    break;
+                case 6:
                     System.out.println("Completed");
                     isViewingReports=false;
                     break;

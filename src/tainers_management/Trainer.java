@@ -75,6 +75,15 @@ public class Trainer {
     }
 
     @Override
+    public String toString() {
+        return "Trainer{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", Activity status= " + (isActive?"Active":"Inactive")+
+                '}';
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Trainer trainer = (Trainer) o;
