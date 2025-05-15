@@ -14,7 +14,21 @@ public class Main {
 
     public static void consoleUI(Scanner sc){
         boolean run=true;
-        while(run){
+        while(run){System.out.println("____________________________________________________________________________");
+            System.out.println("                            WELCOME TO SYSTEM");
+            System.out.println("____________________________________________________________________________");
+            System.out.println("****************************************************************************");
+            System.out.println("*********************  _______  *  _____  *****                           **");
+            System.out.println("********************* |  _____| * |  ___| *****       **           **     **");
+            System.out.println("********************* | |___    * | |     *****      ***___________***    **");
+            System.out.println("********************* |  ___|   * | |     *****     ****-----------****   **");
+            System.out.println("********************* | |       * | |___  *****      ***_Ultimate__***    **");
+            System.out.println("********************* |_|       * |_____| *****       **    GYM    **     **");
+            System.out.println("*********************           *         *****                           **");
+            System.out.println("************************  FITNESS CLUB  ************************************");
+            System.out.println("****************************************************************************");
+            System.out.println("*    *     *   WHEN LIFE GIVES YOU PAIN.....GO TO THE GYM   *    *    *    *");
+            System.out.println("____________________________________________________________________________\n");
             System.out.println("==== Gym management system");
             System.out.print("1. Manage members\n" +
                     "2. Manage trainers\n" +

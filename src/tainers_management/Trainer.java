@@ -10,12 +10,14 @@ public class Trainer {
     private String id;
     private String name;
     private String contact;
+    private boolean isActive;
     private List<Member> members=new ArrayList<>();
 
     public Trainer(String id, String name, String contact) {
         this.id = id;
         this.name = name;
         this.contact=contact;
+        this.isActive=true;
     }
 
     public String getId() {
@@ -32,6 +34,14 @@ public class Trainer {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
     }
 
     public List<Member> getMembers() {
