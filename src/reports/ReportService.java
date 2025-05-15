@@ -15,12 +15,12 @@ public class ReportService {
         String trainerID=sc.next();
         try{
             Optional.ofNullable(TrainerService.trainers.get(trainerID))
-                            .ifPresentOrElse(trainer -> {
+                            .ifPresentOrElse(trainer ->
                                         System.out.println("=== Trainer members ===\n" +
                                                 "Trainer ID:"+trainer.getId()+
                                                 "\nTrainer name: "+trainer.getName()+
-                                                "\nMembers: \n"+trainer.getMembers());
-                                    },
+                                                "\nMembers: \n"+trainer.getMembers())
+                                    ,
                                     ()->System.out.println("Trainer not found."));
         } catch (Exception e) {
             throw new RuntimeException(e);
