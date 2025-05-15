@@ -34,10 +34,9 @@ public class MembershipPlan {
     public double getPrice() {
         return price;
     }
-
-    public int getDurationMonths() {
-        return durationMonths;
-    }
+//    public int getDurationMonths() {
+//        return durationMonths;
+//    }
 
     public String planSummary() {
         return type + " - " + durationMonths + " month(s), Price: ZAR " + price;
